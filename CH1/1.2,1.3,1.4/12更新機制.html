@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      #app {
+        display: block;
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      p {
+        margin: 1rem 0;
+      }
+
+      .messages {
+        padding: 6px 10px;
+        width: 92%;
+        height: 4.5rem;
+        margin-bottom: 1rem;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+      }
+
+      input[type="text"] {
+        width: 93%;
+        height: 1.2rem;
+        padding: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <p>messages: {{ messages }}</p>
+
+      <p>
+        scrollHeight: {{ scrollHeight }} <br />
+        DOM 實際的 scrollHeight: {{ realScrollHeight }}
+      </p>
+
+      <div class="messages">
+        <div v-for="m in messages">{{ m }}</div>
+      </div>
+
+      <input
+        type="text"
+        placeholder="輸入任意文字後按下 enter 鍵"
+        v-model.trim="msg"
+        @keydown.enter="addToMessages"
+      />
+    </div>
+  </body>
+</html>
+
+<script>
+  const vm = Vue.createApp({
+    data: () => {
+      return {
+        msg: "",
+        scrollHeight: 0,
+        realScrollHeight: 0,
+        messages: ["Hello", "Vue.js", "好棒棒"],
+      };
+    },
+    methods: {
+      addToMessages() {
+        this.messages.push(this.msg);
+        this.msg = "";
+
+        const el = document.querySelector(".messages");
+        console.log(el.scrollHeight);
+        console.log("a");
+
+        this.$nextTick(() => {
+          const el2 = document.querySelector(".messages");
+          console.log(el2.scrollHeight);
+          this.scrollHeight = el2.scrollHeight;
+          el2.scrollTop = el2.scrollHeight;
+          this.realScrollHeight = el2.scrollHeight;
+          console.log("b");
+        });
+        console.log("c");
+        console.log("d");
+      },
+    },
+    mounted() {
+      const el = document.querySelector(".messages");
+      this.realScrollHeight = el.scrollHeight;
+      this.scrollHeight = el.scrollHeight;
+    },
+  });
+
+  vm.mount("#app");
+</script>

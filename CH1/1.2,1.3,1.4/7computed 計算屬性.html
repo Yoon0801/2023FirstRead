@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <p> 總金額共 {{ subtotal }} 元 </p>
+        <p> 總金額共 {{ subtotal }} 元 </p>
+        <p> 總金額共 {{ subtotal }} 元 </p>
+        <p> 總金額共 {{ subtotalMethods() }} 元 </p>
+        <p> 總金額共 {{ subtotalMethods() }} 元 </p>
+        <p> 總金額共 {{ subtotalMethods() }} 元 </p>
+        <input type="text" v-model="price"> </inpu> -->
+    </div>
+    <hr>
+    <div id="app2">
+        <p> 總金額共 {{ subtotalComputed }} 元 </p>
+        
+        <p> 總金額共 {{ subtotalMethods() }} 元 </p>
+    
+        <input type="text" v-model="quantity"> </input>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    const vm = Vue.createApp({
+        data() {
+            return {
+                price: 100,
+                quantity: 10
+            }
+        },
+        computed: {
+            subtotal() {
+                console.log('vm_computed');
+                return this.price * this.quantity;
+            }
+        },
+        methods: {
+            subtotalMethods() {
+                console.log('vm_methods');
+                return this.quantity * this.price;
+            }
+        }
+    }).mount('#app');
+
+    
+
+    const vm2 = Vue.createApp({
+        data() {
+            return {
+                quantity: 100,
+                price: 100,
+                message: 'Hello Vue!'
+            }
+        },
+        computed: {
+            subtotalComputed() {
+                console.log('vm2_computed');
+                return this.quantity * this.price;
+                // return 100 * 100;
+            }
+        },
+        methods: {
+            subtotalMethods() {
+                console.log('vm2_methods');
+                // return this.quantity * this.price;
+                return 100 * 100;
+            }
+        }
+    }).mount('#app2');
+
+</script>
