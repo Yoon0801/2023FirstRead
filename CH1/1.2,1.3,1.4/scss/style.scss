@@ -1,0 +1,45 @@
+#app {
+    display: block;
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+
+.wrap {
+    overflow: hidden;
+    margin-bottom: 1rem;
+
+    >div {
+        display: block;
+        float: left;
+        height: 10rem;
+    }
+}
+
+.demo {
+    width: 35%;
+}
+
+.inspector {
+    font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    width: 90%;
+    max-width: 400px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+}
+
+.inspector-msg {
+    padding-left: 1rem;
+    font-size: 1rem;
+    line-height: 2.5;
+    border-bottom: 1px solid #ececec;
+
+    &.highlight {
+        background-color: lightcyan;
+    }
+}
+
+button {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}

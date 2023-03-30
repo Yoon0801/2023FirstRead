@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <p>假設, 1 日幣 = {{jpyrate}} 台幣, 且 1 美金 = {{usdrate}} 台幣:</p>
+      <div>台幣 <input type="text" v-model="twd" /></div>
+      <div>日幣 <input type="text" v-model="jpy" /></div>
+      <div>美金 <input type="text" v-model="usd" /></div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const vm = Vue.createApp({
+    data() {
+      return {
+        twd: 1000,
+        jpyrate: 0.23,
+        usdrate: 30.34,
+      };
+    },
+    computed: {
+      jpy: {
+        get() {
+          return Number.parseFloat(Number(this.twd) / this.jpyrate).toFixed(0);
+        },
+        set(val) {
+          this.twd = Number.parseFloat(Number(val) * this.jpyrate).toFixed(0);
+        },
+      },
+      usd: {
+        get() {
+          return Number.parseFloat(Number(this.twd) / this.usdrate).toFixed(0);
+        },
+        set(val) {
+          this.twd = Number.parseFloat(Number(val) * this.usdrate).toFixed(0);
+        },
+      },
+    },
+  }).mount("#app");
+</script>

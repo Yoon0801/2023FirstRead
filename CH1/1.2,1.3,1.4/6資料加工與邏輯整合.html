@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <!-- <div id="app">
+      <p>總金額共 {{ price * quantity }} 元</p>
+      <p>總金額共 {{ price * quantity }} 元</p>
+      <p>總金額共 {{ price * quantity }} 元</p>
+    </div>
+    <hr /> -->
+
+    <div id="app">
+      <p>總金額共 {{ subtotal() }} 元</p>
+      <p>總金額共 {{ subtotal() }} 元</p>
+      <p>總金額共 {{ subtotal() }} 元</p>
+    </div>
+  </body>
+</html>
+
+<script>
+  const vm = Vue.createApp({
+    data() {
+      return {
+        price: 100,
+        quantity: 10,
+      };
+    },
+    methods: {
+      // subtotal: function () {
+      //     return this.price * this.quantity;
+      // }
+
+      //箭頭函式
+      //   subtotal: () => {
+      //     // 小心這裡的 this 由於 arrow function 的關係變成了 window!
+      //     console.log(this);
+      //     return this.price * this.quantity;
+      //   },
+
+      //ES6
+      subtotal() {
+        // 沒問題！ 這裡的 this 可以對應至 Vue 實體
+        return this.price * this.quantity;
+      },
+    },
+  }).mount("#app");
+</script>

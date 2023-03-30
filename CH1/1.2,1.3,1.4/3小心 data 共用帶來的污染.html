@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <!-- vm1 -->
+    <div id="app"><input type="text" v-model="name" /></div>
+    <!-- vm2 -->
+    <div id="app2"><input type="text" v-model="name" /></div>
+    <br />
+    <div id="app3">{{$hello}}</div>
+  </body>
+</html>
+
+<script>
+  const dataObj = {
+    name: "008JS",
+  };
+
+  const vm1 = Vue.createApp({
+    data() {
+      // return dataObj
+      return { ...dataObj };
+    },
+  }).mount("#app");
+
+  const vm2 = Vue.createApp({
+    data() {
+      // return dataObj
+      return { ...dataObj };
+    },
+  }).mount("#app2");
+
+  const vm = Vue.createApp({
+    data() {
+      return {
+        $hello: "Hello Vue.js!",
+      };
+    },
+  }).mount("#app3");
+
+  //這是由於以底線 _ 或錢字號 $ 作為開頭的屬性，可能會與 Vue.js 內建的屬性與 API 名稱產生衝突，所以應該盡量避免。
+</script>

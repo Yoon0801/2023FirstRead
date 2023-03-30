@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>1 日幣 =0.23 台幣</p>
+        <div>台幣 <input type="text" v-model="twd" v-on:input="twd2jpy"></div>
+        <div>日幣 <input type="text" v-model="jpy" v-on:input="jpy2twd"></div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const vm = Vue.createApp({
+        data() {
+            return {
+                twd: 1000,
+                jpy: 0
+            }
+        },
+        methods: {
+            twd2jpy() {
+                this.jpy = Number.parseFloat(Number(this.twd) / 0.278).toFixed(3);
+            },
+            jpy2twd() {
+                this.twd = Number.parseFloat(Number(this.jpy) * 0.278).toFixed(3);
+            },
+        },
+        mounted() {
+            this.twd2jpy();
+        }
+    }).mount('#app');
+
+</script>

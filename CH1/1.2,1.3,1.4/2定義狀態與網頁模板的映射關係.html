@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.slim.js"
+        integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        單價: {{ price }} <br>
+        數量: {{ quantity }}<br>
+        總金額共 {{ price * quantity }} 元
+    </div>
+</body>
+
+</html>
+
+<script>
+    console.log(document.getElementById('app'))
+    const vm = Vue.createApp({
+        data() {
+            return {
+                price: 100,
+                quantity: 10
+            }
+        },
+        // });
+    }).mount('#app');
+       
+    vm.mount('#app');
+
+    //這裡需要注意的是，若我們在 createApp 時並未將此實體同時掛載至某個 DOM 節點，在變動 vm.$data.name 會跳出無法設定的錯誤：
+    //直到執行至 vm.mount('#app') 之後才會產生對應的 $data。 關於此處細節，在本書的【元件的生命週期與更新機制】一節中會有更詳細的說明。
+
+    // const v = vm.mount('#app');
+
+    // TypeError: Cannot set property 'name' of undefined     
+        // vm.$data.price = 999
+
+    // It's ok 
+    // v.$data.price = 999;
+</script>
