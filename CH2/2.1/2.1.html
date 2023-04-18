@@ -11,33 +11,33 @@
 
 <body>
     <div id="app">
-        <h1>{{msg}}</h1>
-        
-        <custom-component>
-            {{msg}}
-            123
-            789
-        </custom-component>
+        {{msg}}
+        <test-c></test-c>
+        <test-c></test-c>
+        <test-c></test-c>
+        <test-c></test-c>
     </div>
+
     <script>
         const app = Vue.createApp({
             data() {
                 return {
-                    msg: 'Parent!'
+                    msg: "hello!"
                 }
             }
         });
 
-        app.component('custom-component', {
-            template: `<div>Hello!</div>`,
+        app.component('test-c', {
+            template: `<div>測試中</div>
+            <div>{{test2}}</div>`,
             data() {
                 return {
-                    msg: 'Child!'
+                    test2: 'no',
                 }
             }
-        });
+        })
 
-        app.mount('#app');
+        app.mount("#app");
     </script>
 </body>
 
