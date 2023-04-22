@@ -7,31 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <link rel="stylesheet" href="/CH2/2.5/2.5.2.css">
 </head>
 
 <body>
     <div id="app">
-        <button @click="isShow =! isShow">Toggle</button>
-
-        <div style="height: 120px;">
-            <transition name="fade">
-                <div class="block" v-if="isShow">Block 1</div>
-                <div class="block" v-else>Block 2</div>
-            </transition>
-        </div>
+        <test-c :props-number="50"></test-c>
     </div>
 
     <script>
         const app = Vue.createApp({
             data() {
                 return {
-                    isShow: true
+                    msg: "123"
                 }
             }
         });
 
-        app.mount('#app');
+        app.component('test-c', {
+            template: `<div class="component">{{propsNumber}}</div>`,
+            props: {
+                'props-number':{
+                    type: Number,
+                    // validator function 不可存取 data/computed 屬性
+                    validator: value => value > 100
+                }
+            },
+        })
+
+        app.mount("#app");
     </script>
 </body>
 

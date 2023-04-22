@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <p>這是外層元件的 msg ：{{msg}}</p>
+        <p>這裡的v-bind:parent-msg 可以簡寫為 :parent-msg：</p>
+        <test-c v-bind:parent-msg="msg"></test-c> -->
+
+        <p>這是外層元件的 msg ：{{msg}}</p>
+        <p>這裡的v-bind:parent-msg 可以簡寫為 :parent-msg：</p>
+        <test-c :props1="123" :props2="456"></test-c>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    msg: "我是外層"
+                }
+            }
+        });
+
+        app.component('test-c', {
+            template: `<div class="component">從 props 來的 parentMsg ==> {{props1}}</div>
+            <div class="component">從 props 來的 parentMsg ==> {{props2}}</div>
+            <div class="component">從 props 來的 parentMsg ==> {{parentMsg}}</div>
+            <div>自己的 msg ==> {{test2}}</div>`,
+            props: ['props1', 'props2'],
+            // props: ["parentMsg"],
+            data() {
+                return {
+                    test2: 'no',
+                }
+            }
+        })
+
+        app.mount("#app");
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="/CH2/2.5/2.5.1.css">
+</head>
+
+<body>
+    <div id="app">
+        <div style="height: 120px;">
+            <transition>
+                <!-- 這裡透過 v-show 來控制顯示或隱藏 -->
+                <div class="block" v-show="isShow">HELLO VUE</div>
+            </transition>
+        </div>
+
+        <!-- slide -->
+        <div class="wrap">
+            <transition name="slide">
+                <div class="block" v-show="isShow">HELLO VUE<br>Slide</div>
+            </transition>
+        </div>
+
+        <!-- fade -->
+        <div class="wrap">
+            <transition name="fade">
+                <div class="block" v-show="isShow">HELLO VUE<br>Fade</div>
+            </transition>
+        </div>
+
+        <button @click="isShow =! isShow">Toggle</button>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    isShow: true
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>
