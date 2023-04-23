@@ -1,0 +1,39 @@
+#app {
+    display: block;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+#app > ul {
+    > li {
+        margin-left: 0;
+    }
+}
+
+ul > li {
+    display: block;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 8px;
+    background-color: #eee;
+}
+
+h2.has-child {
+    cursor: pointer;
+
+    &::before {
+        content: "+ ";
+    }
+}
+
+h2.has-child.is-open::before {
+    content: "- ";
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+    &:hover {
+        color: red;
+    }
+}

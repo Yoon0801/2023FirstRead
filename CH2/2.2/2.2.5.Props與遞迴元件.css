@@ -1,0 +1,36 @@
+#app {
+  display: block;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+#app > ul > li {
+  margin-left: 0;
+}
+
+ul > li {
+  display: block;
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  padding: 8px;
+  background-color: #eee;
+}
+
+h2.has-child {
+  cursor: pointer;
+}
+h2.has-child::before {
+  content: "+ ";
+}
+
+h2.has-child.is-open::before {
+  content: "- ";
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+a:hover {
+  color: red;
+}/*# sourceMappingURL=2.2.5.Props與遞迴元件.css.map */
