@@ -15,7 +15,7 @@
         <button @click="isShow =! isShow">Toggle</button>
 
         <div style="height: 120px;">
-            <transition name="fade">
+            <transition name="fade" mode="out-in">
                 <div class="block" v-if="isShow">Block 1</div>
                 <div class="block" v-else>Block 2</div>
             </transition>

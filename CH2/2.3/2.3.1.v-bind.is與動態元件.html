@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="/CH2/2.3/2.3.1.v-bind.is與動態元件.css">
+</head>
+
+<body>
+    <div id="app">
+        <button v-for="tab in tabs" :key="tab" :class="['tab-button', { active: currentTab === tab }]"
+            @click="currentTab = tab">
+            {{ tab }}
+        </button>
+
+        <tab-home v-if="currentTab === 'Home'"></tab-home>
+        <tab-posts v-if="currentTab === 'Posts'"></tab-posts>
+        <tab-archive v-if="currentTab === 'Archive'"></tab-archive>
+
+        <component :is="currentTabComponent"></component>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    currentTab: 'Home',
+                    tabs: ['Home', 'Posts', 'Archive']
+                }
+            },
+            computed:{
+                currentTabComponent(){
+                    return `tab-${this.currentTab.toLowerCase()}`;
+                }
+            }
+        });
+
+        app.component('tab-home', {
+            template: `<div class="demo-tab">Home component</div>`
+        });
+
+        app.component('tab-posts', {
+            template: `<div class="demo-tab">Post component</div>`
+        });
+
+        app.component('tab-archive', {
+            template: `<div class="demo-tab">Archive component</div>`
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

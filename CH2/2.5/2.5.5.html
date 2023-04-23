@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="/CH2/2.5/2.5.5.css">
+</head>
+
+<body>
+    <div id="app">
+        <button @click="getUserInfo">取得隨機 User 資訊</button>
+
+        <div class="flexbox-wrapper" :style="{height: height+'px'}">
+            <div class="flexbox-body" ref="content">
+                <div class="user-block" v-if="userInfo.name">
+                    <h2>{{ userInfo.name }} / @{{ userInfo.username }}</h2>
+
+                    <img src="https://dummyimage.com/200x200/666/fff" alt="dummyimage">
+                    <div class="wraps">
+                        <p>{{ userInfo.company.name }}</p>
+                        <p>{{ userInfo.phone }}</p>
+                        <p>{{ userInfo.email }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <transition @before-enter="beforeEnter" @before-leave="beforeLeave">
+            <div v-if="isLoading" class="loading">
+                <img src="https://raw.githubusercontent.com/kurotanshi/vue-functional-demo/master/loading.gif"
+                    alt="loading">
+            </div>
+        </transition>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    height: 0,
+                    userInfo: {},
+                    isLoading: false
+                }
+            },
+            methods: {
+                getRandomUserId() {
+                    // 1 ~ 10
+                    return Math.floor(Math.random() * 10) + 1;
+                },
+                async getUserInfo() {
+                    this.isLoading = true;
+                    this.userInfo = {};
+                    const userId = this.getRandomUserId();
+
+                    const res = await fetch('https://jsonplaceholder.typicode.com/users/' + userId)
+                        .then((response) => response.json())
+                        .then((json) => json);
+
+                    // 加上延遲，避免太快看不到 loading
+                    window.setTimeout(() => {
+                        this.isLoading = false;
+                        this.userInfo = res;
+                    }, 3000);
+
+                },
+                beforeEnter() {
+                    this.height = 0;
+                },
+                beforeLeave() {
+                    // nextTick
+                    this.$nextTick(() => {
+                        // $refs
+                        this.height = this.$refs.content.getBoundingClientRect().height;
+                    })
+                },
+            },
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

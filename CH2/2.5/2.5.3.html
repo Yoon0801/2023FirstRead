@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="/CH2/2.5/2.5.3.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="mode">
+            <label>
+                <input v-model="demo" type="radio" value="A"> Block A
+            </label>
+            <label>
+                <input v-model="demo" type="radio" value="B"> Block B
+            </label>
+            <label>
+                <input v-model="demo" type="radio" value="C"> Block C
+            </label>
+        </div>
+
+        <transition-group name="fade">
+            <div v-if="demo === 'A'" key="block-a" class="block">A Block</div>
+            <div v-if="demo === 'B'" key="block-b" class="block">B Block</div>
+            <div v-if="demo === 'C'" key="block-c" class="block">C Block</div>
+        </transition-group>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    demo: "A",
+                    isShow: true
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+#app {
+    position: relative;
+    display: block;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+button {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.flexbox-wrapper {
+    position: relative;
+    overflow: hidden;
+    transition: height 1s;
+    min-height: 35px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.flexbox-body {
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.user-block {
+    overflow: hidden;
+    background: #eee;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 420px;
+
+    img {
+        width: 100px;
+        height: 100px;
+        float: left;
+        margin: 0 1rem 0 0;
+    }
+
+    .wraps {
+        float: left;
+        margin-top: 1rem;
+        margin-left: 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    h2 {
+        font-weight: 500;
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+    }
+}
+
+.loading {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+
+    img {
+        border: none;
+    }
+}
+
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 1s;
+}
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
